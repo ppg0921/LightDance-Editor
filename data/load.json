@@ -27,7 +27,9 @@
       "7_sw",
       "8_sw",
       "9_sw",
-      "10_sw"
+      "10_sw",
+      "11_doorL",
+      "12_doorR"
     ]
   },
   "Texture": "/data/texture.json"

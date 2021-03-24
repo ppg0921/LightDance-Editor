@@ -308,6 +308,16 @@
       "prefix": "/asset/LEDParts/led_sword/",
       "postfix": ".png",
       "name": ["bl_sword", "red_sword"]
+    },
+    "LED_L_DOOR": {
+      "prefix": "/asset/LEDParts/led_l_door/",
+      "postfix": ".png",
+      "name": ["bl_door", "test"]
+    },
+    "LED_R_DOOR": {
+      "prefix": "/asset/LEDParts/led_r_door/",
+      "postfix": ".png",
+      "name": ["bl_door", "test"]
     }
   }
 }

@@ -49,6 +49,16 @@
     "ip": "",
     "dancerName": "10_lu"
   },
+  "lightdancer-11": {
+    "type": "dancer",
+    "ip": "",
+    "dancerName": "11_doorL"
+  },
+  "lightdancer-12": {
+    "type": "dancer",
+    "ip": "",
+    "dancerName": "12_doorR"
+  },
   "sword1": {
     "type": "dancer",
     "ip": "",

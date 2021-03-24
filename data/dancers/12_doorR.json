@@ -1,0 +1,13 @@
+{
+  "BLPARTS": {},
+  "ELPARTS": {},
+  "LEDPARTS": {
+    "LED_R_DOOR": {
+      "zIndex": 35,
+      "width": 126.968,
+      "height": 177.755,
+      "x": 2.305,
+      "y": 20.701
+    }
+  }
+}

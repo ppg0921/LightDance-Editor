@@ -397,6 +397,12 @@
         "LED_HANDLE": { "src": "bl_handle", "alpha": 0 },
         "LED_GUARD": { "src": "bl_guard", "alpha": 0 },
         "LED_SWORD": { "src": "bl_sword", "alpha": 0 }
+      },
+      "11_doorL": {
+        "LED_L_DOOR": { "src": "bl_door", "alpha": 0 }
+      },
+      "12_doorR": {
+        "LED_R_DOOR": { "src": "bl_door", "alpha": 0 }
       }
     },
     "fade": false
