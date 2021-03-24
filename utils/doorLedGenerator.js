@@ -34,10 +34,10 @@ function parse(door, WIDTH, HEIGHT, type, color, pos, dir) {
         }
       } else {
         // vertical
+        let i = u;
         for (let idx = 0; idx < color[name].length; idx += 2) {
           const len = color[name][idx];
           const c = color[name][idx + 1];
-          let i = u;
           const d_limit = i + len < d ? i + len : d;
           for (; i < d_limit; i += 1) {
             for (let j = l; j < r; j += 1) {
@@ -97,14 +97,14 @@ const outputName = args[2];
 // color config
 // <name> : [長度, 顏色, 長度, 顏色 ...]
 const color = {
-  TOP_L: [150, 0x0000ff], // 左到右，共 150 顆
-  MID_L: [30, 0x00ff00], // 左到右，共 30 顆
-  BTM_L: [100, 0xff0000], // 左到右，共 100 顆
-  PILLAR_L: [120, 0xffffff], // 上到下，共 120 顆
-  TOP_R: [150, 0x0000ff], // 右到左，共 150 顆
-  MID_R: [30, 0x00ff00], // 右到左，共 30 顆
-  BTM_R: [100, 0xff0000], // 右到左，共 100 顆
-  PILLAR_R: [120, 0xffffff], // 上到下，共 120 顆
+  TOP_L: [30, 0x0000ff, 30, 0x000000, 30, 0x0000ff, 30, 0x000000, 30, 0x0000ff], // 左到右，共 150 顆
+  MID_L: [30, 0x0000ff], // 左到右，共 30 顆
+  BTM_L: [30, 0x0000ff, 30, 0x000000, 30, 0x0000ff, 10], // 左到右，共 100 顆
+  PILLAR_L: [30, 0x0000ff, 30, 0x000000, 30, 0x0000ff, 30, 0x000000], // 上到下，共 120 顆
+  TOP_R: [30, 0x0000ff, 30, 0x000000, 30, 0x0000ff, 30, 0x000000, 30, 0x0000ff], // 右到左，共 150 顆
+  MID_R: [30, 0x0000ff], // 右到左，共 30 顆
+  BTM_R: [30, 0x0000ff, 30, 0x000000, 30, 0x0000ff, 10, 0x000000], // 右到左，共 100 顆
+  PILLAR_R: [30, 0x0000ff, 30, 0x000000, 30, 0x0000ff, 30, 0x000000], // 上到下，共 120 顆
 };
 
 // position config

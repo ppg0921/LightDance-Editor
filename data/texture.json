@@ -312,12 +312,12 @@
     "LED_L_DOOR": {
       "prefix": "/asset/LEDParts/led_l_door/",
       "postfix": ".png",
-      "name": ["bl_door", "test"]
+      "name": ["bl_door", "test", "blue_bl"]
     },
     "LED_R_DOOR": {
       "prefix": "/asset/LEDParts/led_r_door/",
       "postfix": ".png",
-      "name": ["bl_door", "test"]
+      "name": ["bl_door", "test", "blue_bl"]
     }
   }
 }
