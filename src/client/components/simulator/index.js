@@ -14,7 +14,14 @@ import Controller from "./controller";
  */
 
 export default function Simulator() {
-  const { currentStatus, currentPos } = useSelector(selectGlobal);
+  const {
+    currentStatus,
+    currentPos,
+    isPlaying,
+    controlRecord,
+    posRecord,
+    timeData,
+  } = useSelector(selectGlobal);
   const [controller, setController] = useState(null);
 
   useEffect(() => {
@@ -34,6 +41,23 @@ export default function Simulator() {
       controller.updateDancersPos(currentPos);
     }
   }, [controller, currentPos]);
+
+  useEffect(() => {
+    if (controller) {
+      if (isPlaying) {
+        console.log("Play");
+        controller.pixiApp.startTime = performance.now();
+        controller.pixiApp.waveSuferTime = timeData.time;
+        controller.pixiApp.state = { controlRecord, posRecord };
+        controller.pixiApp.state.timeData = { ...timeData };
+        controller.tickerF = controller.play.bind(controller);
+        controller.pixiApp.ticker.add(controller.tickerF);
+      } else {
+        console.log("Stop");
+        controller.pixiApp.ticker.remove(controller.tickerF);
+      }
+    }
+  }, [isPlaying]);
 
   return (
     <div

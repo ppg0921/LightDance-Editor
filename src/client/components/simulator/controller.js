@@ -7,6 +7,11 @@ import store from "../../store";
 // components
 import Dancer from "./dancer";
 
+import {
+  updateFrameByTime,
+  interpolationPos,
+  fadeStatus,
+} from "../../utils/math";
 /**
  * Control the dancers (or other light objects)'s status and pos
  * @constructor
@@ -83,6 +88,58 @@ class Controller {
     Object.entries(currentPos).forEach(([key, value]) => {
       this.dancers[key].setPos(value);
     });
+  }
+
+  play() {
+    const time =
+      this.pixiApp.waveSuferTime + performance.now() - this.pixiApp.startTime;
+    const { state } = this.pixiApp;
+
+    // set timeData.controlFrame and currentStatus
+    const newControlFrame = updateFrameByTime(
+      state.controlRecord,
+      state.timeData.controlFrame,
+      time
+    );
+    state.timeData.controlFrame = newControlFrame;
+    // status fade
+    if (newControlFrame === state.controlRecord.length - 1) {
+      // Can't fade
+      state.currentStatus = state.controlRecord[newControlFrame].status;
+    } else {
+      // do fade
+      state.currentStatus = fadeStatus(
+        time,
+        state.controlRecord[newControlFrame],
+        state.controlRecord[newControlFrame + 1]
+      );
+    }
+
+    // set timeData.posFrame and currentPos
+    const newPosFrame = updateFrameByTime(
+      state.posRecord,
+      state.timeData.posFrame,
+      time
+    );
+    state.timeData.posFrame = newPosFrame;
+    // position interpolation
+    if (newPosFrame === state.posRecord.length - 1) {
+      // can't interpolation
+      state.currentPos = state.posRecord[newPosFrame].pos;
+    } else {
+      // do interpolation
+      state.currentPos = interpolationPos(
+        time,
+        state.posRecord[newPosFrame],
+        state.posRecord[newPosFrame + 1]
+      );
+    }
+
+    // set currentFade
+    state.currentFade = state.controlRecord[newControlFrame].fade;
+
+    this.updateDancersStatus(state.currentStatus);
+    this.updateDancersPos(state.currentPos);
   }
 }
 
