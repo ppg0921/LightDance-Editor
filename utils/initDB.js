@@ -8,7 +8,7 @@ const FormData = require("form-data");
 const filePath = process.argv[2];
 
 const instance = axios.create({
-  baseURL: `http://localhost:4000/`,
+  baseURL: `http://localhost:7778/`,
 });
 
 async function main() {

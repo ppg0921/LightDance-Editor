@@ -6,7 +6,7 @@ services:
       context: ./prod-support/nginx
       dockerfile: Dockerfile
     ports:
-      - "8080:80"
+      - "7777:80"
     networks:
       - lightdance-editor
   editor:
@@ -22,7 +22,7 @@ services:
       context: .
       dockerfile: ./prod-support/editor-server/Dockerfile
     ports:
-      - "4000:4000"
+      - "7778:4000"
     networks:
       - lightdance-editor
   file-server:
