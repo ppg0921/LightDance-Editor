@@ -36,7 +36,7 @@ services:
   mongodb:
     image: mongo
     volumes:
-      - ./mongodbData:/data/db
+      - mongodbData:/data/db
     networks:
       - lightdance-editor
   redisdb:
@@ -48,3 +48,5 @@ networks:
   lightdance-editor:
     external:
       name: eeinfo
+volumes:
+  mongodbData:
