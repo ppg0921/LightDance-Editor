@@ -1,51 +1,36 @@
 version: "3.4"
 
 services:
-  nginx:
+  lightdance-editor-nginx:
     build:
       context: ./prod-support/nginx
       dockerfile: Dockerfile
-    ports:
-      - "7777:80"
     networks:
-      - lightdance-editor
+      - default
+      - eeinfo
   editor:
     build:
       context: .
       dockerfile: ./prod-support/editor/Dockerfile
-    expose:
-      - "8080"
-    networks:
-      - lightdance-editor
   editor-server:
     build:
       context: .
       dockerfile: ./prod-support/editor-server/Dockerfile
-    ports:
-      - "7778:4000"
-    networks:
-      - lightdance-editor
   file-server:
     build:
       context: .
       dockerfile: ./prod-support/file-server/Dockerfile
     volumes:
       - ./files:/app/files
-    networks:
-      - lightdance-editor
   mongodb:
     image: mongo
     volumes:
       - mongodbData:/data/db
-    networks:
-      - lightdance-editor
   redisdb:
     image: redis
-    networks:
-      - lightdance-editor
 
 networks:
-  lightdance-editor:
+  eeinfo:
     external:
       name: eeinfo
 volumes:
