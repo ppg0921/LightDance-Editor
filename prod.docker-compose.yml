@@ -16,6 +16,8 @@ services:
     build:
       context: .
       dockerfile: ./prod-support/editor-server/Dockerfile
+    ports:
+      - "7778:4000"
   file-server:
     build:
       context: .
