@@ -4,10 +4,11 @@ const child_process = require("child_process");
 const readline = require("readline");
 
 
-const sname = "../files/data/wavform.json";
-const musicName = "../files/music/2023.mp3";    // you can alter the music name here
+const sname = "../files/data/waveform.json";
+const musicNamePath = "../files/music";    // you can alter the music name here
+let musicName = "2023.mp3";
 let ifp = path.join(String(__dirname), sname);       // name (path included) to the waveform image
-let sfp = path.join(String(__dirname), musicName);   // name (path included) to the music
+let sfp = path.join(String(__dirname), musicNamePath);   // name (path included) to the music
 let cmd = [];   // the command that will later be used to generate waveform
 let pixelsPerSecond = 1000;
 
@@ -16,6 +17,7 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+
 
 const readIntegerInput = (prompt) => {
   return new Promise((resolve, reject) => {
@@ -36,9 +38,24 @@ const readIntegerInput = (prompt) => {
   });
 };
 
-const readInput = async () => {
+const readStringInput = (prompt) => {
+  return new Promise((resolve, reject) => {
+    rl.question(prompt, (input) => {
+      // const parsedInput = parseInt(input, 10);
+      if (input == "") {
+        resolve("2023.mp3");
+      } else {
+        resolve(String(input));
+      }
+    });
+  });
+};
 
+const readInput = async () => {
   try {
+    musicName = await readStringInput("Enter music name:(ex: 2023.mp3): ");
+    sfp = path.join(sfp, musicName);
+    // console.log(`sfp = ${sfp}`);
     pixelsPerSecond = await readIntegerInput("Enter pixels-per-second(1000): ");
     if (!(typeof pixelsPerSecond === 'number' && isFinite(pixelsPerSecond))) {
       pixelsPerSecond = 1000;
@@ -57,7 +74,7 @@ const generateWav = () => {
   cmd = [...cmd, "-i", String(sfp), "-o", String(ifp), "--pixels-per-second", String(pixelsPerSecond)];
 
   let cmdString = cmd.join(" ");
-  console.log(`cmd = ${cmdString}`);
+  // console.log(`cmd = ${cmdString}`);
   let startGenerationTime = Date.now();
   console.log("start generating");
   try {
